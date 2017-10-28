@@ -7,16 +7,13 @@ using System.Text;
 
 namespace TalkTalk.Http
 {
-    class ConnectionAPI
+    public class ConnectionAPI
     {
         private const String host = "http://jisuznwd.market.alicloudapi.com";
         private const String path = "/iqa/query";
         private const String method = "GET";
         private const String appcode = "11cde8e24eb94641b44831fe09c66ad3";
-        public ConnectionAPI(string message)
-        {
 
-        }
         public async Task<string> SendMessage(string message)
         {
             String querys = "question="+message;

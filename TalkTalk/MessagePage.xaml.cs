@@ -26,5 +26,11 @@ namespace TalkTalk
         {
             this.InitializeComponent();
         }
+
+        private void Test_Click(object sender, RoutedEventArgs e)
+        {
+            Http.ConnectionAPI connectionAPI = new Http.ConnectionAPI();
+            res.Text= connectionAPI.SendMessage("Hi").Result;
+        }
     }
 }
