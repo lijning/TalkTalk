@@ -30,7 +30,7 @@ namespace TalkTalk
         private async void Test_Click(object sender, RoutedEventArgs e)
         {
             Http.ConnectionAPI connectionAPI = new Http.ConnectionAPI();
-            res.Text= await connectionAPI.SendMessage("Hi");//如果不将其设置为阻塞，就好……卡爆掉。
+            res.Text= await connectionAPI.SendMessage("Hi");//如果不将其设置为异步，就 界面崩溃了。
         }
     }
 }

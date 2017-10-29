@@ -5,7 +5,7 @@ using System.IO;
 using System.Text;
 //using Windows.Web.Http;
 
-namespace TalkTalk.Http
+namespace TalkTalk.Model
 {
     public class ConnectionAPI
     {
@@ -59,5 +59,6 @@ namespace TalkTalk.Http
                 httpResponse = (HttpWebResponse)ex.Response;
             }*/
         }
+
     }
 }
