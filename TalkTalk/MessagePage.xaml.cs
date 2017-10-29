@@ -27,10 +27,10 @@ namespace TalkTalk
             this.InitializeComponent();
         }
 
-        private void Test_Click(object sender, RoutedEventArgs e)
+        private async void Test_Click(object sender, RoutedEventArgs e)
         {
             Http.ConnectionAPI connectionAPI = new Http.ConnectionAPI();
-            res.Text= connectionAPI.SendMessage("Hi").Result;
+            res.Text= await connectionAPI.SendMessage("Hi");//如果不将其设置为阻塞，就好……卡爆掉。
         }
     }
 }
