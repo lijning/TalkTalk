@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.IO;
 using System.Text;
+using Newtonsoft.Json;
 //using Windows.Web.Http;
 
 namespace TalkTalk.Model
@@ -59,6 +60,22 @@ namespace TalkTalk.Model
                 httpResponse = (HttpWebResponse)ex.Response;
             }*/
         }
-
+        public string GetContent(string json)
+        {
+            Reply reply = (Reply)JsonConvert.DeserializeObject<Reply>(json);
+            return reply.result.content;
+        }
+    }
+    public struct Reply
+    {
+        public int status;
+        public string msg;
+        public Result result;
+    }
+    public class Result
+    {
+        public string type;
+        public string content;
+        public string relquestion;
     }
 }

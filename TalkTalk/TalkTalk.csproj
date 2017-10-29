@@ -134,6 +134,9 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\..\0RefPackages\Net20\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System.Net.Json, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\0RefPackages\System.Net.Json.dll</HintPath>
