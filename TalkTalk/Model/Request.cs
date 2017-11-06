@@ -8,7 +8,11 @@ using Newtonsoft.Json;
 
 namespace TalkTalk.Model
 {
-    public class ConnectionAPI
+    /* By passing in the message to send as a parameter, the caller can get 
+     * both the reply and the query stored in the Record.
+     * Call the Q&S method.
+     */
+    public class Connector
     {
         private const String host = "http://jisuznwd.market.alicloudapi.com";
         private const String path = "/iqa/query";
@@ -44,12 +48,12 @@ namespace TalkTalk.Model
             Reply reply = (Reply)JsonConvert.DeserializeObject<Reply>(json);
             return reply.result.content;
         }
-        public void QueryAndStore(string messageToSend)
+        public async void QueryAndStore(string messageToSend)
         {
             Record.InitializeRecords();
-            var reply = SendMessage(messageToSend);
+            var reply = await SendMessage(messageToSend);
             Record.queries.Add(messageToSend);
-            Record.replies.Add(GetContent(reply.Result));
+            Record.replies.Add(GetContent(reply));
         }
     }
     public struct Reply

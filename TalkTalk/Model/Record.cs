@@ -7,6 +7,10 @@ using System.Collections;
 
 namespace TalkTalk.Model
 {
+    /*This static class performs as a container for all the messages.
+     * Two lists: replies and queries are available for the caller.
+     * 
+     */ 
     public static class Record
     {
         public static List<string> replies, queries;
