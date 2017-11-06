@@ -7,21 +7,28 @@ using System.Collections;
 
 namespace TalkTalk.Model
 {
-    public class Record
+    public static class Record
     {
-        List<string> replies, queries;
-        public Record()
+        public static List<string> replies, queries;
+        public static void InitializeRecords()
         {
-            replies = new List<string>();
-            queries = new List<string>();
+            if(replies==null)
+                replies = new List<string>();
+            if(queries==null)
+                queries = new List<string>();
         }
-        public void AddQuery(string query)
+        public static void ClearRecords()
         {
-            queries.Add(query);
-        }
-        public void AddReply(string reply)
-        {
-            replies.Add(reply);
+            try
+            {
+                replies.Clear();
+                queries.Clear();
+            }
+            catch (NullReferenceException)
+            {
+                
+                return;
+            }
         }
     }
 }

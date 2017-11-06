@@ -15,7 +15,7 @@ namespace TalkTalk.Model
         private const String method = "GET";
         private const String appcode = "11cde8e24eb94641b44831fe09c66ad3";
 
-        public async Task<string> SendMessage(string message)
+        private async Task<string> SendMessage(string message)
         {
             String querys = "question="+message;
             String url = host + path;
@@ -38,32 +38,18 @@ namespace TalkTalk.Model
                 client.Dispose();
             }
             return reply;
-            /*
-            try
-            {
-                //ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(CheckValidationResult);
-                httpRequest = (HttpWebRequest)WebRequest.Create(new Uri(url));
-            }
-            catch (Exception)
-            {
-
-            }
-            httpRequest.Method = method;
-            HttpRequestHeaderColl cc = new HttpRequestHeader();
-            httpRequest.Headers.Add("Authorization", "APPCODE " + appcode);
-            try
-            {
-                httpResponse = (HttpWebResponse)httpRequest.GetResponse();
-            }
-            catch (WebException ex)
-            {
-                httpResponse = (HttpWebResponse)ex.Response;
-            }*/
         }
-        public string GetContent(string json)
+        private string GetContent(string json)
         {
             Reply reply = (Reply)JsonConvert.DeserializeObject<Reply>(json);
             return reply.result.content;
+        }
+        public void QueryAndStore(string messageToSend)
+        {
+            Record.InitializeRecords();
+            var reply = SendMessage(messageToSend);
+            Record.queries.Add(messageToSend);
+            Record.replies.Add(GetContent(reply.Result));
         }
     }
     public struct Reply
@@ -79,3 +65,24 @@ namespace TalkTalk.Model
         public string relquestion;
     }
 }
+/*
+try
+{
+    //ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(CheckValidationResult);
+    httpRequest = (HttpWebRequest)WebRequest.Create(new Uri(url));
+}
+catch (Exception)
+{
+
+}
+httpRequest.Method = method;
+HttpRequestHeaderColl cc = new HttpRequestHeader();
+httpRequest.Headers.Add("Authorization", "APPCODE " + appcode);
+try
+{
+    httpResponse = (HttpWebResponse)httpRequest.GetResponse();
+}
+catch (WebException ex)
+{
+    httpResponse = (HttpWebResponse)ex.Response;
+}*/
