@@ -22,14 +22,32 @@ namespace TalkTalk
     /// </summary>
     public sealed partial class MainPage : Page
     {
+
+        MessageInterface.TalkWindow talkWindow;
+        Model.Connector connector = new Model.Connector();
+        
         public MainPage()
         {
+            talkWindow = new MessageInterface.TalkWindow();
+            this.DataContext = talkWindow;
             this.InitializeComponent();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            SendText.Text = SendBox.Text;
+            if (!(string.IsNullOrEmpty(SendBox.Text)||string.IsNullOrWhiteSpace(SendBox.Text)))
+            {
+                MessageInterface.Message messageSent = new MessageInterface.Message(SendBox.Text, true, DateTime.Now);
+                talkWindow.AddMessage(messageSent);
+                MessageInterface.Message messageReceived = new MessageInterface.Message();
+                
+                connector.QueryAndStore(messageSent.Content);
+                messageReceived.Content = Model.Record.replies.Last();
+                messageReceived.IsSelf = false;
+                messageReceived.SentTime = DateTime.Now;
+                talkWindow.AddMessage(messageReceived);
+            }
+            SendBox.Text = string.Empty;
         }
     }
 }

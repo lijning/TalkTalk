@@ -95,6 +95,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MessageInterface\MessageBase.cs" />
+    <Compile Include="MessageInterface\MessageItemDataTemplateSelector.cs" />
+    <Compile Include="MessageInterface\TalkWindow.cs" />
     <Compile Include="Model\Record.cs" />
     <Compile Include="Model\Request.cs" />
     <Compile Include="MessagePage.xaml.cs">
@@ -133,11 +136,11 @@
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.0.1</Version>
     </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>10.0.3</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\..\0RefPackages\Net20\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System.Net.Json, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\0RefPackages\System.Net.Json.dll</HintPath>
