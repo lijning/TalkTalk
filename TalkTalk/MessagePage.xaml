@@ -21,6 +21,7 @@
                   ItemTemplateSelector="{StaticResource MessageItemDataTemplateSelector}"
                   ItemsSource="{Binding MessageList}"
                   Grid.ColumnSpan="2"
+                  SelectionMode="None"
                   >
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
