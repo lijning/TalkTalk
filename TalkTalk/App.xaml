@@ -7,17 +7,24 @@
     RequestedTheme="Light">
 
     <Application.Resources>
-        
+
         <DataTemplate x:Key="MessageDataTemplate">
             <Grid HorizontalAlignment="Left"  >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Grid Grid.Row="0" CornerRadius="4" Background="LightGray" Padding="15">
-                    <TextBlock Text="{Binding Context}"></TextBlock>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Row="0" Grid.Column="1" CornerRadius="4" Background="LightGray" Padding="10">
+                    <TextBlock MaxWidth="500" TextWrapping="Wrap" HorizontalAlignment="Stretch" Text="{Binding Content}"></TextBlock>
                 </Grid>
-                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                <Grid Grid.Column="0">
+                    <Ellipse Height="36" Width="36" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,0,10,0" Fill="#FFFC4646"/>
+                </Grid>
+                <StackPanel Grid.Row="1" Orientation="Horizontal" Grid.ColumnSpan="2">
                     <TextBlock Text="{Binding Name}" Foreground="LightGray"></TextBlock>
                     <TextBlock Text="{Binding SentTime}" Foreground="LightGray" Margin="10,0,0,0"></TextBlock>
                 </StackPanel>
@@ -30,10 +37,19 @@
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Grid Grid.Row="0" CornerRadius="4" Background="DeepSkyBlue" Padding="15">
-                    <TextBlock Text="{Binding Context}" Foreground="White"></TextBlock>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Row="0" Grid.Column="0" CornerRadius="4" Background="DeepSkyBlue" HorizontalAlignment="Right" Padding="10">
+                    <StackPanel>
+                        <TextBlock Text="{Binding Content}" Foreground="White"></TextBlock>
+                    </StackPanel>
                 </Grid>
-                <StackPanel Grid.Row="1"  Orientation="Horizontal" HorizontalAlignment="Right">
+                <Grid Grid.Column="1">
+                    <Ellipse Height="36" Width="36" VerticalAlignment="Top" Margin="10,0,0,0" Fill="#FFFFEF00"/>
+                </Grid>
+                <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
                     <TextBlock Text="{Binding SentTime}"  Foreground="LightGray" Margin="0,0,10,0"></TextBlock>
                     <TextBlock Text="{Binding Name}" Foreground="LightGray"></TextBlock>
                 </StackPanel>
@@ -42,6 +58,6 @@
 
         <local1:MessageItemDataTemplateSelector x:Key="MessageItemDataTemplateSelector"></local1:MessageItemDataTemplateSelector>
         <local1:TalkWindow x:Key="TalkWindowData"></local1:TalkWindow>
-    
+
     </Application.Resources>
 </Application>

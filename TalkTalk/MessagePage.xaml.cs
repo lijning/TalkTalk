@@ -33,19 +33,21 @@ namespace TalkTalk
             this.InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (!(string.IsNullOrEmpty(SendBox.Text)||string.IsNullOrWhiteSpace(SendBox.Text)))
+            if (!(string.IsNullOrEmpty(SendBox.Text) || string.IsNullOrWhiteSpace(SendBox.Text)))
             {
                 MessageInterface.Message messageSent = new MessageInterface.Message(SendBox.Text, true, DateTime.Now);
                 talkWindow.AddMessage(messageSent);
                 MessageInterface.Message messageReceived = new MessageInterface.Message();
-                
-                connector.QueryAndStore(messageSent.Content);
-                messageReceived.Content = Model.Record.replies.Last();
+
+                messageReceived.Content = await connector.QueryAndStore(messageSent.Content);
+                //messageReceived.Content = Model.Record.replies.Last();
                 messageReceived.IsSelf = false;
                 messageReceived.SentTime = DateTime.Now;
                 talkWindow.AddMessage(messageReceived);
+                MessageListView.SelectedIndex = MessageListView.Items.Count - 1;
+                MessageListView.ScrollIntoView(MessageListView.SelectedItem);
             }
             SendBox.Text = string.Empty;
         }

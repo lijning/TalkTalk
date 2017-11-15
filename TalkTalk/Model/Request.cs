@@ -48,14 +48,22 @@ namespace TalkTalk.Model
             Reply reply = (Reply)JsonConvert.DeserializeObject<Reply>(json);
             return reply.result.content;
         }
-        public async void QueryAndStore(string messageToSend)
+        public async Task<string> QueryAndStore(string messageToSend)
         {
+            string messageCore;
             Record.InitializeRecords();
             var reply = await SendMessage(messageToSend);
-            Record.queries.Add(messageToSend);
-            Record.replies.Add(GetContent(reply));
+            try
+            {
+                Record.queries.Add(messageToSend);
+            }
+            catch (Exception) { }
+            messageCore = GetContent(reply);
+            Record.replies.Add(messageCore);
+            return messageCore;
         }
     }
+
     public struct Reply
     {
         public int status;
